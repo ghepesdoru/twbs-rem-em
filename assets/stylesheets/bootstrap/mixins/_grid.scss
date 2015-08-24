@@ -8,14 +8,14 @@
   margin-left: auto;
   padding-left:  em($gutter / 2);
   padding-right: em($gutter / 2);
-  @include clearfix();
+  @include clearfix;
 }
 
 // Creates a wrapper for a series of columns
 @mixin make-row($gutter: $grid-gutter-width) {
-  margin-left:  em($gutter / -2);
-  margin-right: em($gutter / -2);
-  @include clearfix();
+  margin-left:  em(ceil(($gutter / -2)));
+  margin-right: em(floor(($gutter / -2)));
+  @include clearfix;
 }
 
 // Generate the extra small columns
