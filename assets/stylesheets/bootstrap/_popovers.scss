@@ -11,7 +11,10 @@
   display: none;
   max-width: em($popover-max-width);
   padding: em(1px);
-  text-align: left; // Reset given new insertion method
+  // Our parent element can be arbitrary since popovers are by default inserted as a sibling of their target element.
+  // So reset our font and text properties to avoid inheriting weird values.
+  @include reset-text;
+  font-size: em($font-size-base);
   background-color: $popover-bg;
   background-clip: padding-box;
   border: 1px solid $popover-fallback-border-color;

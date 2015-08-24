@@ -8,9 +8,10 @@
   position: absolute;
   z-index: $zindex-tooltip;
   display: block;
-  visibility: visible;
+  // Our parent element can be arbitrary since tooltips are by default inserted as a sibling of their target element.
+  // So reset our font and text properties to avoid inheriting weird values.
+  @include reset-text;
   font-size: em($font-size-small);
-  line-height: 1.4;
   @include opacity(0);
 
   &.in     { @include opacity($tooltip-opacity); }
@@ -26,7 +27,6 @@
   padding: em(3px) em(8px);
   color: $tooltip-color;
   text-align: center;
-  text-decoration: none;
   background-color: $tooltip-bg;
   @include rem(border-radius, $border-radius-base);
 }
@@ -39,6 +39,7 @@
   border-color: transparent;
   border-style: solid;
 }
+// Note: Deprecated .top-left, .top-right, .bottom-left, and .bottom-right as of v3.3.1
 .tooltip {
   &.top .tooltip-arrow {
     bottom: 0;
@@ -49,13 +50,15 @@
   }
   &.top-left .tooltip-arrow {
     bottom: 0;
-    left: em($tooltip-arrow-width);
+    right: em($tooltip-arrow-width);
+    margin-bottom: em(-$tooltip-arrow-width);
     @include rem(border-width, $tooltip-arrow-width $tooltip-arrow-width 0);
     border-top-color: $tooltip-arrow-color;
   }
   &.top-right .tooltip-arrow {
     bottom: 0;
-    right: em($tooltip-arrow-width);
+    left: em($tooltip-arrow-width);
+    margin-bottom: em(-$tooltip-arrow-width);
     @include rem(border-width, $tooltip-arrow-width $tooltip-arrow-width 0);
     border-top-color: $tooltip-arrow-color;
   }
@@ -82,13 +85,15 @@
   }
   &.bottom-left .tooltip-arrow {
     top: 0;
-    left: em($tooltip-arrow-width);
+    right: em($tooltip-arrow-width);
+    margin-top: em(-$tooltip-arrow-width);
     @include rem(border-width, 0 $tooltip-arrow-width $tooltip-arrow-width);
     border-bottom-color: $tooltip-arrow-color;
   }
   &.bottom-right .tooltip-arrow {
     top: 0;
-    right: em($tooltip-arrow-width);
+    left: em($tooltip-arrow-width);
+    margin-top: -$tooltip-arrow-width;
     @include rem(border-width, 0 $tooltip-arrow-width $tooltip-arrow-width);
     border-bottom-color: $tooltip-arrow-color;
   }
